@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference userRef = database.getReference("DEVICE_ID").child("Status");
 
         userRef.setValue(isLock);
-
-
     }
 
 }
