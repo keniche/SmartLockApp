@@ -55,7 +55,20 @@ public class MainActivity extends AppCompatActivity {
 
         userRef.setValue(isLock);
 
-
     }
+
+    public void postTimestamp(View v) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference timestampRef = database.getReference("DEVICE_ID").child("Timestamp");
+
+        Timestamp timestamp = new Timestamp();
+        timestamp.setDatetime("2001-03-10_17:16:18");
+        timestamp.setUserName("konatsu_p");
+        timestamp.setLocked(isLock);
+
+        timestampRef.push().setValue(timestamp);
+    }
+
+
 
 }
