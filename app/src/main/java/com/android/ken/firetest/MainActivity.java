@@ -1,5 +1,6 @@
 package com.android.ken.firetest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,14 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//
-
-        textView = (TextView)findViewById(R.id.textView);
+        textView = findViewById(R.id.textView);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference userRef = database.getReference("DEVICE_ID").child("Status");
-//        userRef.setValue(isLock);
-
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -45,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void touch (View v){
@@ -54,6 +53,30 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference userRef = database.getReference("DEVICE_ID").child("Status");
 
         userRef.setValue(isLock);
+
+        postTimestamp(v);
+
     }
+
+    public void postTimestamp(View v) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference timestampRef = database.getReference("DEVICE_ID").child("Timestamp");
+
+        Timestamp timestamp = new Timestamp();
+        timestamp.setDatetime("2001-03-10_17:16:18");
+        timestamp.setUserName("konatsu_p");
+        timestamp.setLocked(isLock);
+
+        timestampRef.push().setValue(timestamp);
+    }
+
+    public void seeTimestamp(View v) {
+        Intent intent = new Intent(this, TimestampActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
 
 }
