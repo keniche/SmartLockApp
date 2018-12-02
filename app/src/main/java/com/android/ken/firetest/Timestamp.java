@@ -3,9 +3,20 @@ package com.android.ken.firetest;
 
 public class Timestamp {
 
+
+    long id;
     private String datetime;
     private String userName;
     private boolean isLocked;
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getDatetime() {
         return datetime;
