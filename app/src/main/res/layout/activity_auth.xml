@@ -25,11 +25,11 @@
             </ListView>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:onClick="infoAdd"
+                android:onClick="plus"
                 android:text="追加" />
         </LinearLayout>
     </LinearLayout>

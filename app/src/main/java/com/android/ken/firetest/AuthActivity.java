@@ -1,5 +1,6 @@
 package com.android.ken.firetest;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -70,13 +71,8 @@ public class AuthActivity extends AppCompatActivity {
 
     }
 
-    public void infoAdd(View v) {
-        Auth auth = new Auth("sample", "10aaaaaa2222");
-        refAuth.push().setValue(auth);
-    }
-
-    public void postSampleAuth(View v) {
-//        Auth auth = new Auth("sample","10aaaaaa2222");
-//        refAuth.push().setValue(auth);
+    public void plus(View v) {
+        Intent intent = new Intent(this, AddAuthActivity.class);
+        startActivity(intent);
     }
 }

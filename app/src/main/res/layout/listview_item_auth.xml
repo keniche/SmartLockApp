@@ -13,8 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="userName"
-            android:onClick="postSampleAuth"
             android:textAlignment="center"
             android:textSize="20sp" />
 
@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="expiredAt"
             android:textAlignment="center"
             android:textSize="20sp" />
