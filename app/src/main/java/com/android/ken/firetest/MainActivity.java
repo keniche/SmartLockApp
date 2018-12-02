@@ -3,10 +3,8 @@ package com.android.ken.firetest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
 
     final String DEVICE_ID = "hoge";
     Boolean isLock = true;
-    TextView textView;
+    ToggleButton toggleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.textView);
+        toggleButton = (ToggleButton)findViewById(R.id.toggleButton) ;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference userRef = database.getReference("DEVICE_ID").child("Status");
@@ -34,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 isLock = dataSnapshot.getValue(Boolean.class);
-                textView.setText(isLock.toString());
+
+                if (isLock == true){
+                    toggleButton.setChecked(true);
+                }else{
+                    toggleButton.setChecked(false);
+                }
+
             }
 
             @Override
@@ -47,27 +51,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void touch (View v){
+
         isLock = !isLock;
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference userRef = database.getReference("DEVICE_ID").child("Status");
 
         userRef.setValue(isLock);
 
-        postTimestamp(v);
-
     }
 
-    public void postTimestamp(View v) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference timestampRef = database.getReference("DEVICE_ID").child("Timestamp");
-
-        Timestamp timestamp = new Timestamp();
-        timestamp.setDatetime("2001-03-10_17:16:18");
-        timestamp.setUserName("konatsu_p");
-        timestamp.setLocked(isLock);
-
-        timestampRef.push().setValue(timestamp);
+    public void seeAuth(View v){
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
     }
 
     public void seeTimestamp(View v) {
